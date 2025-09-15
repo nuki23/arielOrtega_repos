@@ -1,0 +1,130 @@
+<div class="pt-4 relative px-8">
+  <div class="flex justify-between">
+    <div class="cntn-bg p-2 rounded-full">
+      <button nz-button nzType="default" nzShape="circle" [routerLink]="['/home']" [disabled]="isLoading">
+        <ng-icon class="text-[20px] text-gray-400" name="saxArrowLeft3Bold" />
+      </button>
+    </div>
+    <!-- <div class="cntn-bg p-2 rounded-full flex">
+      <div
+        class="h-[42px] flex items-center border mr-2 pl-2 pr-4 rounded-full text-gray-400 hover:border-blue-400 transition-all cursor-pointer active:scale-95">
+        <ng-icon class="text-[20px] mr-[6px]" name="saxArrowLeft3Bold" />
+        #1 bolbaso
+      </div>
+      <div
+        class="h-[42px] flex items-center border pl-4 pr-2 rounded-full text-gray-400 hover:border-blue-400 transition-all cursor-pointer active:scale-95">
+        #1 bolbaso
+        <ng-icon class="text-[20px] ml-[6px]" name="saxArrowRight2Bold" />
+      </div>
+    </div> -->
+  </div>
+  @if (isLoading) {
+  <div class="w-full relative h-[calc(100vh_-_110px)] flex justify-center items-center">
+    <div class="">
+      <p>Cargando detalles del Pokémon...</p>
+    </div>
+  </div>
+  }
+  @else {
+  <div class="grid grid-cols-1 sm:grid-cols-3 md:px-10  lg:px-24 xl:px-40 pt-6 gap-4">
+    <div class="col-span-1">
+      <div class="text-4xl capitalize font-bold">
+        {{ pokemon.name }}
+      </div>
+      <div class="h-[18.75rem] cntn-bg rounded-[20px] my-4 flex justify-center items-center overflow-hidden relative">
+        <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" class="h-[300px]" loading="lazy">
+        <div class="absolute right-0 top-0 p-4 bg-gray-800 rounded-bl-3xl">
+          <span class="text-white font-bold">#{{pokemon.id}}</span>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-1">
+        @for (type of pokemon.types; track $index) {
+        <div class="px-3 py-1 rounded-full text-white font-bold text-sm capitalize"
+          [class]="pokemonTypeColors[type.type.name]">
+          {{ type.type.name }}
+        </div>
+        }
+
+      </div>
+    </div>
+    <div class="grid-cols-1 sm:col-span-2">
+      <div class="cntn-bg p-4 rounded-[20px] mb-4">
+        <h3 class="text-xl font-bold text-gray-700">
+          Estadísticas
+        </h3>
+        @for (stat of pokemon.stats; track stat.stat.name) {
+        <div class="flex items-center my-2">
+          <label class="w-1/3 text-sm font-semibold capitalize text-gray-700">{{ stat.stat.name }}</label>
+          <label for="">{{stat.base_stat}}</label>
+          <nz-progress class="w-full ml-4" [nzPercent]="stat.base_stat"  [nzShowInfo]="false"
+            nzStrokeColor="#5795C7"></nz-progress>
+        </div>
+        }
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <div class="cntn-bg rounded-[20px] h-24 w-24 flex justify-center flex-col items-center">
+          <label class="font-bold text-gray-700">Alto</label>
+          <label for="">{{ (pokemon?.height! * 0.1).toFixed(2) }} m</label>
+        </div>
+        <div class="cntn-bg rounded-[20px] h-24 w-24 flex justify-center flex-col items-center">
+          <label class="font-bold text-gray-700">Peso</label>
+          <label for="">{{ (pokemon?.weight! * 0.1).toFixed(2) }} kg</label>
+        </div>
+
+      </div>
+      <div class="cntn-bg p-4 rounded-[20px] mt-4">
+        <h3 class="text-xl font-bold text-gray-700">
+          Movimientos
+        </h3>
+        <div class="flex flex-wrap gap-2 mt-2">
+          @if (pokemon) {
+          @for (move of pokemon.moves; track move.move.name) {
+          <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm font-semibold capitalize">
+            {{ move.move.name }}
+          </span>
+          }
+          }
+        </div>
+      </div>
+      <div class="cntn-bg p-4 rounded-[20px] mt-4">
+        <h3 class="text-xl font-bold text-gray-700">
+          Sprites
+        </h3>
+        <div class="flex flex-wrap gap-4 items-center mt-2">
+          @if (pokemon) {
+          @if(pokemon.sprites.back_default){
+          <img [src]="pokemon.sprites.back_default" [alt]="pokemon.name" class="w-20 h-20 object-contain"
+            loading="lazy">
+          }
+          @if(pokemon.sprites.back_female){
+          <img [src]="pokemon.sprites.back_female" [alt]="pokemon.name" class="w-20 h-20 object-contain" loading="lazy">
+          }
+          @if(pokemon.sprites.back_shiny){
+          <img [src]="pokemon.sprites.back_shiny" [alt]="pokemon.name" class="w-20 h-20 object-contain" loading="lazy">
+          }
+          @if(pokemon.sprites.back_shiny_female){
+          <img [src]="pokemon.sprites.back_shiny_female" [alt]="pokemon.name" class="w-20 h-20 object-contain"
+            loading="lazy">
+          }
+          @if(pokemon.sprites.front_default){
+          <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" class="w-20 h-20 object-contain"
+            loading="lazy">
+          }
+          @if(pokemon.sprites.front_female){
+          <img [src]="pokemon.sprites.front_female" [alt]="pokemon.name" class="w-20 h-20 object-contain"
+            loading="lazy">
+          }
+          @if(pokemon.sprites.front_shiny){
+          <img [src]="pokemon.sprites.front_shiny" [alt]="pokemon.name" class="w-20 h-20 object-contain" loading="lazy">
+          }
+          @if(pokemon.sprites.front_shiny_female){
+          <img [src]="pokemon.sprites.front_shiny_female" [alt]="pokemon.name" class="w-20 h-20 object-contain"
+            loading="lazy">
+          }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

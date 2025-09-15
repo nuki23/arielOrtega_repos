@@ -1,0 +1,30 @@
+
+// Custom Theming for NG-ZORRO
+// For more information: https://ng.ant.design/docs/customize-theme/en
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
+
+// Override less variables to here
+// View all variables: https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/style/themes/default.less
+
+// @primary-color: #1890ff;
+@border-radius-base: 25px;
+@height-base: 42px;
+
+.ant-input, .ant-input-affix-wrapper{
+  border-radius: @border-radius-base;
+  padding: 9px 16px;
+}
+
+.ant-select{
+  border-radius: @border-radius-base;
+  .ant-select-selector{
+    padding: 0 16px !important;
+    height: @height-base;
+  }
+  .ant-select-selection-placeholder{
+    left: 16px;
+  }
+  .ant-select-arrow, .ant-select-clear{
+    right: 16px;
+  }
+}

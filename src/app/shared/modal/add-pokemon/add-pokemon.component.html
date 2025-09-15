@@ -1,0 +1,137 @@
+<form [formGroup]="formPoke">
+  <div nz-row [nzGutter]="[12, 8]">
+    <div nz-col nzXs="24">
+      <h3 class="text-xl font-bold text-gray-700 mt-2">
+        Imagen
+      </h3>
+    </div>
+    <div nz-col nzXs="24">
+      <nz-upload nzAction="" nzListType="picture-card" [nzShowUploadList]="true" [nzBeforeUpload]="beforeUpload">
+        <div *ngIf="!pokemonImageBase64" class="h-full w-full flex justify-center items-center flex-col">
+          <ng-icon name="saxDocumentUploadBold" class="text-gray-600 text-xl" />
+          <div class="ant-upload-text">Subir Imagen</div>
+        </div>
+        <div class="h-full w-full flex justify-center items-center" *ngIf="pokemonImageBase64">
+          <img [src]="pokemonImageBase64" class="h-3/4" srcset="">
+        </div>
+      </nz-upload>
+    </div>
+    <!-- caracteristicas -->
+    <div nz-col nzXs="24">
+      <h3 class="text-xl font-bold text-gray-700 mt-2">
+        Caracteristicas
+      </h3>
+    </div>
+    <div nz-col nzLg="8" nzXs="24">
+      <div class="">
+        <label class="text-[0.875rem] font-semibold text-gray-700">Nombre</label>
+        <input nz-input [nzStatus]="(name?.invalid && (name?.dirty || name?.touched)) ? 'error' : ''"
+          formControlName="name" type="text" />
+      </div>
+    </div>
+    <div nz-col nzLg="8" nzXs="24">
+      <div class="">
+        <label class="text-[0.875rem] font-semibold text-gray-700">Peso(dm)</label>
+        <input nz-input [nzStatus]="(peso?.invalid && (peso?.dirty || peso?.touched)) ? 'error' : ''" type="number"
+          maxlength="2" formControlName="peso" />
+      </div>
+    </div>
+    <div nz-col nzLg="8" nzXs="24">
+      <div class="">
+        <label class="text-[0.875rem] font-semibold text-gray-700">Altura(hg)</label>
+        <input nz-input [nzStatus]="(altura?.invalid && (altura?.dirty || altura?.touched)) ? 'error' : ''"
+          maxlength="3" type="number" formControlName="altura" />
+      </div>
+    </div>
+    <div nz-col nzXs="24">
+      <h3 class="text-xl font-bold text-gray-700">
+        Estadísticas
+      </h3>
+    </div>
+    <div nz-col nzLg="8" nzXs="24">
+      <div class="">
+        <label class="text-[0.875rem] font-semibold text-gray-700">Hp</label>
+        <input nz-input [nzStatus]="(hp?.invalid && (hp?.dirty || hp?.touched)) ? 'error' : ''" type="number"
+          maxlength="3" formControlName="hp" />
+      </div>
+    </div>
+    <div nz-col nzLg="8" nzXs="24">
+      <div class="">
+        <label class="text-[0.875rem] font-semibold text-gray-700">Ataque</label>
+        <input nz-input [nzStatus]="(ataque?.invalid && (ataque?.dirty || ataque?.touched)) ? 'error' : ''"
+          maxlength="3" type="number" formControlName="ataque" />
+      </div>
+    </div>
+    <div nz-col nzLg="8" nzXs="24">
+      <div class="">
+        <label class="text-[0.875rem] font-semibold text-gray-700">Defensa</label>
+        <input nz-input [nzStatus]="(defensa?.invalid && (defensa?.dirty || defensa?.touched)) ? 'error' : ''"
+          maxlength="3" type="number" formControlName="defensa" />
+      </div>
+    </div>
+    <div nz-col nzLg="8" nzXs="24">
+      <div class="">
+        <label class="text-[0.875rem] font-semibold text-gray-700">Ataque especial</label>
+        <input nz-input [nzStatus]="(espAtaque?.invalid && (espAtaque?.dirty || espAtaque?.touched)) ? 'error' : ''"
+          maxlength="3" type="number" formControlName="espAtaque" />
+      </div>
+    </div>
+    <div nz-col nzLg="8" nzXs="24">
+      <div class="">
+        <label class="text-[0.875rem] font-semibold text-gray-700">defensa especial</label>
+        <input nz-input [nzStatus]="(espDefensa?.invalid && (espDefensa?.dirty || espDefensa?.touched)) ? 'error' : ''"
+          maxlength="3" type="number" formControlName="espDefensa" />
+      </div>
+    </div>
+    <div nz-col nzLg="8" nzXs="24">
+      <div class="">
+        <label class="text-[0.875rem] font-semibold text-gray-700">velocidad</label>
+        <input nz-input [nzStatus]="(velocidad?.invalid && (velocidad?.dirty || velocidad?.touched)) ? 'error' : ''"
+          maxlength="3" type="number" formControlName="velocidad" />
+      </div>
+    </div>
+    <!-- movimientos -->
+    <div nz-col nzXs="24">
+      <h3 class="text-xl font-bold text-gray-700 mt-2">
+        Movimientos
+      </h3>
+    </div>
+    <div nz-col nzXs="24">
+      <nz-select [nzMaxTagCount]="4" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+        formControlName="movimiento" nzAllowClear class="w-full"
+        [nzStatus]="(movimiento?.invalid && (movimiento?.dirty || movimiento?.touched)) ? 'error' : ''"
+        nzPlaceHolder="Please select">
+        @for (item of pokemonMoves; track item.name) {
+        <nz-option [nzLabel]="item.name | titlecase" [nzValue]="item.name"></nz-option>
+        }
+      </nz-select>
+      <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
+    </div>
+    <!-- tipo -->
+    <div nz-col nzXs="24">
+      <h3 class="text-xl font-bold text-gray-700 mt-2">
+        Tipo
+      </h3>
+    </div>
+    <div nz-col nzXs="24">
+      <nz-select [nzMaxTagCount]="4" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple" formControlName="tipo"
+        nzAllowClear class="w-full" [nzStatus]="(tipo?.invalid && (tipo?.dirty || tipo?.touched)) ? 'error' : ''"
+        nzPlaceHolder="Please select">
+        @for (item of pokemonTypes; track item.name) {
+        <nz-option [nzLabel]="item.name | titlecase" [nzValue]="item.name"></nz-option>
+        }
+      </nz-select>
+      <ng-template #tagPlaceHolder let-selectedList>and {{ selectedList.length }} more selected</ng-template>
+    </div>
+    <div nz-col nzXs="24">
+      <div class="w-full flex justify-end mt-4 flex-wrap gap-2">
+        <button nz-button nzType="default" nzShape="round" (click)="cancel()">
+          Cancelar
+        </button>
+        <button nz-button nzType="primary" nzShape="round" (click)="confirm()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
