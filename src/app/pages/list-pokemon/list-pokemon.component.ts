@@ -174,10 +174,7 @@ export default class ListPokemonComponent implements OnInit {
       nzFooter: null,
       nzWidth: 800,
       nzMaskClosable: false,
-      nzData: {
-        name: 'Carlos',
-        age: 30,
-      },
+      nzData: {},
     });
 
     modal.afterClose.subscribe((result) => {

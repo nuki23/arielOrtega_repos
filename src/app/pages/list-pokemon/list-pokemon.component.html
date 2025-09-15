@@ -21,7 +21,6 @@
       </button>
 
       <button nz-button class="ml-2" nzType="primary" nzShape="round" (click)="showModal()">
-        <!-- <ng-icon class="text-[20px]" name="saxAddCircleBold" /> -->
         Crear pokemon
       </button>
     </div>
@@ -36,10 +35,10 @@
       }
       @else{
       @for (pokemon of listPoke; track $index) {
-      <div [routerLink]="['/pokemon', pokemon.id, pokemon.isCustom ? true : false]"
+      <div class="card-pokemon" [routerLink]="['/pokemon', pokemon.id, pokemon.isCustom ? true : false]"
         class="col-span-1 h-44 px-4 pb-4 pt-2 flex items-center justify-center relative rounded-3xl focus:shadow-none shadow-[0_4px_12px_rgba(0,0,0,0.08)] bg-white hover:opacity-75 cursor-pointer transition-all">
-        <div class="w-full h-[120px] flex  items-center flex-col ">
-          <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" class="w-24 h-24 mb-2" loading="lazy">
+        <div class="w-full h-[120px] flex  items-center flex-col">
+          <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" class="w-24 h-24" loading="lazy">
           <p class="text-sm text-gray-500 txt-3dot text-center w-full">#{{ pokemon.id }}</p>
           <h3 class="font-bold capitalize">{{ pokemon.name }}</h3>
         </div>
